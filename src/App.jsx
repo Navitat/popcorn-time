@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import Header from "./components/Header";
 import MovieList from "./pages/MovieList";
 import Footer from "./components/Footer";
+import MovieDetails from "./pages/MovieDetails";
 
 function App() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
@@ -32,6 +33,12 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+
+        <Route
+          path="/movies/:movieId"
+          element={<MovieDetails moviesArr={moviesToDisplay} />}
+        />
+
         <Route path="*" element={<h1>Page not found</h1>} />
       </Routes>
       <Footer />
