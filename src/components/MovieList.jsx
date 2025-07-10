@@ -1,5 +1,6 @@
 import { useState } from "react";
 import movies from "../data/movies.json";
+import MovieCard from "./MovieCard";
 
 function MovieList() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
@@ -9,12 +10,6 @@ function MovieList() {
     // deleteMovie: will receive the id of a movie to delete & update state with the new list of movies
     const newList = moviesToDisplay.filter((movie) => {
       return movie.id !== movieId;
-      // if (movie.id !== movieId) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      // return movies.id !== movieId ? true : false
     });
     setMoviesToDisplay(newList);
     // setNumOfMovies(newList.length)
@@ -26,21 +21,7 @@ function MovieList() {
 
       {moviesToDisplay.map((movie) => {
         return (
-          <div key={movie.id} className="card">
-            <h3>{movie.title}</h3>
-            <img src={movie.imgURL} alt="movie poster" />
-            <p>Year: {movie.year}</p>
-            <p>Rating: {movie.rating}</p>
-            <p>
-              <button
-                onClick={() => {
-                  deleteMovie(movie.id);
-                }}
-              >
-                Delete this Movie
-              </button>
-            </p>
-          </div>
+          <MovieCard key={movie.id} movieInfo={movie} onDelete={deleteMovie} />
         );
       })}
     </div>
