@@ -6,6 +6,7 @@ function Header(props) {
     <div className="Header">
       <nav>
         <NavLink to="/">Home</NavLink>
+        <NavLink to="/create">Add New Movie</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
       </nav>

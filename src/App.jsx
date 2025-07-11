@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import MovieList from "./pages/MovieList";
 import Footer from "./components/Footer";
 import MovieDetails from "./pages/MovieDetails";
+import AddMovie from "./pages/AddMovie";
 
 function App() {
   const [moviesToDisplay, setMoviesToDisplay] = useState(movies);
@@ -20,68 +21,25 @@ function App() {
     setMoviesToDisplay(newList);
   };
 
-  const [title, setTitle] = useState("");
-  const [year, setYear] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    //add movie to the list of movies
+  const createMovie = (newMovieDetails) => {
+    // create an id for the new movie
     const nextId = Math.max(...moviesToDisplay.map((movie) => movie.id)) + 1;
+
     const newMovie = {
+      ...newMovieDetails,
       id: nextId,
-      title: title,
-      year: year,
     };
 
+    //prepare array with the new list of movies
     const newList = [newMovie, ...moviesToDisplay];
 
     //update the list of movies
     setMoviesToDisplay(newList);
-
-    // clear form
-    setTitle("");
-    setYear("");
   };
 
   return (
     <>
       <Header numberOfMovies={moviesToDisplay.length} />
-
-      <section className="card">
-        <h2>Create a new movie</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Title:
-            <input
-              type="text"
-              name="title"
-              value={title}
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-              placeholder="enter the title"
-              required
-            />
-          </label>
-          <label>
-            Year:
-            <input
-              type="number"
-              min={1950}
-              max={2025}
-              name="year"
-              placeholder="enter the year"
-              value={year}
-              onChange={(e) => {
-                setYear(e.target.value);
-              }}
-              required
-            />
-          </label>
-          <button>Create</button>
-        </form>
-      </section>
 
       <Routes>
         <Route
@@ -90,6 +48,7 @@ function App() {
             <MovieList moviesArr={moviesToDisplay} onDelete={deleteMovie} />
           }
         />
+        <Route path="/create" element={<AddMovie onCreate={createMovie} />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
 
