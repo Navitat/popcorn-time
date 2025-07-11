@@ -27,7 +27,9 @@ function App() {
     e.preventDefault();
 
     //add movie to the list of movies
+    const nextId = Math.max(...moviesToDisplay.map((movie) => movie.id)) + 1;
     const newMovie = {
+      id: nextId,
       title: title,
       year: year,
     };
