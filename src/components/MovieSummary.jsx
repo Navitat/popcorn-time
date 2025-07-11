@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 
 function MovieSummary(props) {
   return (
-    <div className="card">
+    <div key={props.movieInfo.id} className="card">
       <h3>{props.movieInfo.title}</h3>
-      <img src={props.movieInfo.imgURL} alt="movie poster" />
+      {/* <img src={props.movieInfo.imgURL} alt="movie poster" /> */}
+      {props.movieInfo.imgURL && (
+        <img src={props.movieInfo.imgURL} alt="Movie poster" />
+      )}
       <p>Year: {props.movieInfo.year}</p>
       <p>
         <button

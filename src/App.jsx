@@ -20,9 +20,45 @@ function App() {
     setMoviesToDisplay(newList);
   };
 
+  const [title, setTitle] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    //add movie to the list of movies
+    const newMovie = {
+      title: title,
+      year: 1900,
+    };
+
+    const newList = [newMovie, ...moviesToDisplay];
+
+    //update the list of movies
+    setMoviesToDisplay(newList);
+
+    // clear form
+    setTitle("");
+  };
+
   return (
     <>
       <Header numberOfMovies={moviesToDisplay.length} />
+
+      <section className="card">
+        <h2>Create a new movie</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            placeholder="enter the title"
+          />
+          <button>Create</button>
+        </form>
+      </section>
 
       <Routes>
         <Route
