@@ -21,6 +21,7 @@ function App() {
   };
 
   const [title, setTitle] = useState("");
+  const [year, setYear] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ function App() {
     //add movie to the list of movies
     const newMovie = {
       title: title,
-      year: 1900,
+      year: year,
     };
 
     const newList = [newMovie, ...moviesToDisplay];
@@ -38,6 +39,7 @@ function App() {
 
     // clear form
     setTitle("");
+    setYear("");
   };
 
   return (
@@ -47,15 +49,34 @@ function App() {
       <section className="card">
         <h2>Create a new movie</h2>
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            placeholder="enter the title"
-          />
+          <label>
+            Title:
+            <input
+              type="text"
+              name="title"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              placeholder="enter the title"
+              required
+            />
+          </label>
+          <label>
+            Year:
+            <input
+              type="number"
+              min={1950}
+              max={2025}
+              name="year"
+              placeholder="enter the year"
+              value={year}
+              onChange={(e) => {
+                setYear(e.target.value);
+              }}
+              required
+            />
+          </label>
           <button>Create</button>
         </form>
       </section>
